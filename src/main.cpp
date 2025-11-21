@@ -21,35 +21,38 @@ struct Count {
 int remote(int argc, char* argv[]) {
   // Passing in the command line arguments will allow the explorer to display
   // the application name.
-  flecs::world ecs(argc, argv);
+  flecs::world world(argc, argv);
 
-  ecs.set_threads(4);
+  world.set_threads(4);
 
   TestRunner::setLogLevel(TestRunner::LogLevel::INFO);
-  TestRunner::initialize(ecs, [](flecs::world& world) {
+  TestRunner::registerModule<modules::movement>(world);
+  TestRunner::registerModule<modules::time>(world);
+
+  TestRunner::initialize(world, [](flecs::world& world) {
     world.import<modules::movement>();
     world.import<modules::time>();
   });
 
 
-  ecs.import<flecs::units>();
-  ecs.import<flecs::stats>(); // Collect statistics periodically
+  world.import<flecs::units>();
+  world.import<flecs::stats>(); // Collect statistics periodically
 
 
   // Mass component
-  ecs.component<Mass>()
+  world.component<Mass>()
     .member<double, mass::KiloGrams>("value");
 
 
 
   // Simple hierarchy
-  flecs::entity Sun = ecs.entity("Sun")
+  flecs::entity Sun = world.entity("Sun")
     .set<Mass>({ 1.988500e31 });
 
-  flecs::entity Earth = ecs.scope(Sun).entity("Earth")
+  flecs::entity Earth = world.scope(Sun).entity("Earth")
     .set<Mass>({ 5.9722e24 });
 
-  ecs.scope(Earth).entity("Moon")
+  world.scope(Earth).entity("Moon")
     .set<Mass>({ 7.34767309e22 });
 
 
@@ -80,7 +83,7 @@ int remote(int argc, char* argv[]) {
   // navigate to https://flecs.dev/explorer to inspect it!
   //
   // See docs/FlecsRemoteApi.md#explorer for more information.
-  return ecs.app()
+  return world.app()
     .enable_rest()
     .enable_stats()
     .run();

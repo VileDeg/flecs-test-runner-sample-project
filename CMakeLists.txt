@@ -1,30 +1,14 @@
-set(EXE_NAME "TestRunnerCore")
-set(SRC_DIR "./")
+cmake_minimum_required(VERSION 3.14)
 
+set(PROJECT_NAME "TestRunnerSample")
 
-#include(../Functions.cmake)
-discover_sources(${SRC_DIR} SRC_FILES)
+# Set the project name and version
+project(${PROJECT_NAME} VERSION 1.0)
 
-# Add the test executable
-add_executable(
-  ${EXE_NAME} 
-  ${SRC_FILES}
-)
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add src directory to include path so headers can be found
-target_include_directories(
-  ${EXE_NAME} 
-  PRIVATE 
-  ${SRC_DIR}
-  ${SHARED_DIR}
-  ${TEST_RUNNER_INCLUDE_DIR}
-  ${MODULES_INCLUDE_DIR}
-)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-target_link_libraries(
-  ${EXE_NAME}
-  PRIVATE
-  flecs::flecs_static
-  ${TEST_RUNNER_LIB_NAME}
-  ${MODULES_LIB_NAME}
-)
+add_subdirectory(src) 
