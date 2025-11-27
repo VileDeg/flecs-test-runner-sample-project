@@ -23,17 +23,19 @@ int remote(int argc, char* argv[]) {
   // the application name.
   flecs::world world(argc, argv);
 
-  world.set_threads(4);
+  world.set_threads(4); // TODO: remove?
 
   TestRunner::setLogLevel(TestRunner::LogLevel::INFO);
   TestRunner::registerModule<modules::movement>(world);
   TestRunner::registerModule<modules::time>(world);
 
-  TestRunner::initialize(world, [](flecs::world& world) {
+  /*TestRunner::initialize(world, [](flecs::world& world) {
     world.import<modules::movement>();
     world.import<modules::time>();
-  });
+  });*/
 
+
+#if 0
 
   world.import<flecs::units>();
   world.import<flecs::stats>(); // Collect statistics periodically
@@ -56,7 +58,6 @@ int remote(int argc, char* argv[]) {
     .set<Mass>({ 7.34767309e22 });
 
 
-#if 0
    
   std::cout << "All entities: \n";
 
