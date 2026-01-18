@@ -7,14 +7,20 @@
 .PARAMETER Clean
     If set, deletes the 'build' directory before starting. 
     Use this if CMake gets confused about old paths.
+.PARAMETER ModulesPath
+    Path to the flecs-test-runner-modules directory.
+    Defaults to '../flecs-test-runner-modules' if not supplied.
+.PARAMETER TestRunnerPath
+    Path to the flecs-test-runner directory.
+    Defaults to '../flecs-test-runner' if not supplied.
 #>
 param (
-    [switch]$Clean
+    [switch]$Clean,
+    [string]$ModulesPath = "../flecs-test-runner-modules",
+    [string]$TestRunnerPath = "../flecs-test-runner"
 )
 
 $BuildDir = "build"
-$ModulesPath = "../flecs-test-runner-modules"
-$TestRunnerPath = "../flecs-test-runner"
 
 # --- Step 1: Clean Build Directory (Optional) ---
 if ($Clean) {
