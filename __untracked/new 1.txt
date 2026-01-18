@@ -1,4 +1,0 @@
-
-
-PUT
-localhost:27750/component/Sun?component=UnitTest&systemName="testSystem"
