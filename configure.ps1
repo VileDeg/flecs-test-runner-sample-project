@@ -15,7 +15,6 @@
     Defaults to '../flecs-test-runner' if not supplied.
 #>
 param (
-    [switch]$Build,
     [switch]$Clean,
     [string]$ModulesPath = "../flecs-test-runner-modules",
     [string]$TestRunnerPath = "../flecs-test-runner"
@@ -50,19 +49,4 @@ $CmakeArgs = @(
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[!] Configuration Failed." -ForegroundColor Red
     exit 1
-}
-
-if ($Build) {
-    # --- Step 3: Build the Project ---
-    Write-Host "[*] Building project..." -ForegroundColor Cyan
-
-    # --parallel uses all available CPU cores for a faster build
-    cmake --build $BuildDir --parallel 
-
-    if ($LASTEXITCODE -eq 0) {
-        Write-Host "[+] Build Successful!" -ForegroundColor Green
-    } else {
-        Write-Host "[!] Build Failed." -ForegroundColor Red
-        exit 1
-    }
 }
