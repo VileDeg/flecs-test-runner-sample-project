@@ -4,8 +4,9 @@
 #include <flecs.h>
 
 #include <test_runner/test_runner.h>
-#include <modules/movement.h>
+//#include <modules/movement.h>
 #include <modules/time.h>
+#include <modules/test.h>
 
 using mass = flecs::units::mass;
 
@@ -26,8 +27,11 @@ int remote(int argc, char* argv[]) {
   world.set_threads(4); // TODO: remove?
 
   TestRunner::setLogLevel(TestRunner::LogLevel::INFO);
-  TestRunner::registerModule<movement::module>(world);
-  TestRunner::registerModule<modules::time>(world);
+  TestRunner::initialize<
+		movement::module, 
+		modules::time
+	>(world);
+  //TestRunner::registerModule<modules::time>(world);
 
 	TestRunner::registerTypes<movement::Vector2D>(world); // world
 
