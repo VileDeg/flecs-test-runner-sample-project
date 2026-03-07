@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_set>
 
+//#define FLECS_CREATE_MEMBER_ENTITIES
 #include <flecs.h>
 
 #include <test_runner/test_runner.h>
@@ -29,11 +30,11 @@ int remote(int argc, char* argv[]) {
   TestRunner::setLogLevel(TestRunner::LogLevel::INFO);
   TestRunner::initialize<
 		movement::module, 
-		modules::time
+		waiting::module
 	>(world);
   //TestRunner::registerModule<modules::time>(world);
 
-	TestRunner::registerTypes<movement::Vector2D>(world); // world
+	//TestRunner::registerTypes<movement::Vector2D>(world); // world
 
   /*TestRunner::initialize(world, [](flecs::world& world) {
     world.import<modules::movement>();
@@ -107,10 +108,6 @@ int remote(int argc, char* argv[]) {
 #endif
 
   std::cout << "Running HTTP server on port 27750 ...\n";
-  // Run application with REST interface. When the application is running,
-  // navigate to https://flecs.dev/explorer to inspect it!
-  //
-  // See docs/FlecsRemoteApi.md#explorer for more information.
   return world.app()
     .enable_rest()
     .enable_stats()

@@ -48,6 +48,14 @@ target_include_directories(
     ${SRC_DIR}
 )
 
+# TODO: in newer version should not be needed
+# currently needed to retrive reflection info about component's members
+target_compile_definitions(
+    flecs_static 
+    PRIVATE 
+        FLECS_CREATE_MEMBER_ENTITIES
+)
+
 target_link_libraries(
   ${EXE_NAME}
   PRIVATE
