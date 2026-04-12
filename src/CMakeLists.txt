@@ -1,26 +1,16 @@
 include(FetchContent)
 
-# Fetch the Flecs repository
-FetchContent_Declare(
-    flecs
-    GIT_REPOSITORY https://github.com/SanderMertens/flecs.git
-    #GIT_TAG master # Use the latest version; replace with a specific tag if needed
-)
-
 FetchContent_Declare(
     test_runner
     GIT_REPOSITORY https://github.com/VileDeg/flecs-test-runner
-    #GIT_TAG master # Use the latest version; replace with a specific tag if needed
 )
 
 FetchContent_Declare(
     modules
     GIT_REPOSITORY https://github.com/VileDeg/flecs-test-runner-modules
-    #GIT_TAG master # Use the latest version; replace with a specific tag if needed
 )
 
 FetchContent_MakeAvailable(
-    flecs
     test_runner
     modules
 )
@@ -51,7 +41,6 @@ target_include_directories(
 target_link_libraries(
   ${EXE_NAME}
   PRIVATE
-    flecs::flecs_static
     ${TEST_RUNNER_LIB_NAME}
     ${MODULES_LIB_NAME}
 )

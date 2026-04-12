@@ -1,17 +1,14 @@
 # Flecs Test Runner Sample
 
-This is a sample project using the **Flecs Test Runner (FTR)**.
+This is a sample project using [**FTR Core**](https://github.com/VileDeg/flecs-test-runner).
 
 It serves for demonstrational purposes of how a real project would use the **FTR**.
 
-A real project would **include the FTR header(s)**, **register** the **testable modules** and be compiled to create a test executable that is supposed to connect to the **FTR web client**. (TODO maybe FTR will define the main function that will open the port?)
-
-TODO
+A real project would **include the FTR header(s)**, **register** the **testable modules** and be compiled to create a test executable that is supposed to connect to the [**FTR web client**](https://github.com/VileDeg/flecs-test-runner-client). 
 
 ## Supported languages 
 
 - C++ (at least C++17).
-- TODO
 
 ## Build (C++)
 
@@ -33,6 +30,4 @@ cmake -S . -B build/
 
 Run the executable.
 
-The program will open a port `27750` for connection. This is the default port using by Flecs Rest API. See the documentation: 
-
-https://www.flecs.dev/flecs/md_docs_2FlecsRemoteApi.html
+The program will open a **default Flecs REST API port** for connection. See [docs](https://www.flecs.dev/flecs/md_docs_2FlecsRemoteApi.html).
