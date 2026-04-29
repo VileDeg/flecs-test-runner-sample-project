@@ -2,9 +2,11 @@
 
 #include <modules/time.h>
 #include <modules/movement.h>
+#include <modules/structural.h>
+#include <modules/modifiers.h>
 
 int main(int argc, char *argv[]) {
-	TestRunner::setLogLevel(TestRunner::LogLevel::INFO);
+	TestRunner::setLogLevel(TestRunner::LogLevel::TRACE);
 #if 0 
 	return TestRunner::main<
 		movement::module,
@@ -14,7 +16,9 @@ int main(int argc, char *argv[]) {
 	flecs::world world(argc, argv);
 	TestRunner::initialize<
 		movement::module,
-		waiting::module
+		waiting::module,	
+		structural::module,
+		modifiers::module
 	>(world);
 	// Single:
 	// TestRunner::registerOperatorsForComponent<movement::Velocity>(world);
