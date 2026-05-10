@@ -94,11 +94,20 @@ int main(int argc, char *argv[]) {
 		std::cout << "Parsed arguments: " << parsed << "\n";
 	}
 	TestRunner::setLogLevel(logLevel);
-#if 0 
+#if 1
 	return TestRunner::main<
 		movement::module,
-		waiting::module
-	>(argc, argv);
+		waiting::module,
+		structural::module,
+		modifiers::module
+	>(
+		8,
+		parsed.profileBatchSize > 0
+			? std::optional<int>{parsed.profileBatchSize}
+			: std::nullopt,
+		argc, 
+		argv
+	);
 #else
 	flecs::world world(argc, argv);
 	TestRunner::initialize<
